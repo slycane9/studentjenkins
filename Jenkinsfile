@@ -7,9 +7,11 @@ pipeline {
     stages {
         stage('Build') { 
             steps { 
-                sh 'pwd'
-                sh 'echo copying tests to git repo' 
-                sh 'cp /u/srolo/netsec-tests/test1.py /u/srolo/.jenkins/workspace/Serdjan_Rolovic/newsapp/newslister/tests.py'
+                sh '''#!/bin/bash
+                pwd
+                echo copying tests to git repo
+                cp /u/srolo/netsec-tests/test1.py $(pwd)/newsapp/newslister/tests.py
+                '''
             }
         }
         
