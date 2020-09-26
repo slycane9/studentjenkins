@@ -21,7 +21,7 @@ pipeline {
                         echo "Submission mode activated"}
                     catch(err){
                         echo "Submission mode not activated"
-                        currentBuild.result = 'FAILURE' }
+                        currentBuild.result = 'ABORTED' }
                 }
             }
         }
