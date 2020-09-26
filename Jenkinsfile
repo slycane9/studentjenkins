@@ -27,7 +27,7 @@ pipeline {
         }
         
         stage('Test'){
-            when {currentBuild.result != 'ABORTED'}
+            when {expression{currentBuild.result != 'ABORTED'}}
             steps {
                 sh 'echo test phase'
                 script{
