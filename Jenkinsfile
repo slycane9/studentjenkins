@@ -47,26 +47,18 @@ pipeline {
                             '''
                             
                         }
-                        sh 'cat newsapp/result.txt'
-                        sh '''#!/bin/bash
-                        mail -s "Lab 1 Test Passed" serdjanrolovic@gmail.com < newsapp/result.txt
-                        '''
                     }
                     catch(err){
                         currentBuild.result = 'FAILURE'
-                        sh '''#!/bin/bash
-                        mail -s "Lab 1 Test Failed" serdjanrolovic@gmail < newsapp/result.txt
-                        '''
                     }
                 }
             }
         }
         
-        stage('Return Fail Logs') {
-            when {expression{currentBuild.result == 'FAILURE'}}
+        stage('Send Results') {
             steps { 
                 sh '''#!/bin/bash
-                        mail -s "Lab 1 Test Failed" serdjanrolovic@gmail < newsapp/result.txt
+                        mail -s "Lab 1 Results" serdjanrolovic@gmail < newsapp/result.txt
                         '''
             }
         }
