@@ -43,7 +43,7 @@ pipeline {
                             pipenv run python generate_secret.py
                             pipenv run python manage.py migrate --run-syncdb
                             '''
-                            sh 'pipenv run python manage.py test'
+                            sh 'pipenv run python newsapp/manage.py test'
                             sh 'ls'
                             
                         }
