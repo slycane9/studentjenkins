@@ -59,17 +59,5 @@ pipeline {
                 }
             }
         }
-        
-        stage('Send Fail Results') {
-            when {expression{currentBuild.result != 'SUCCESS'}}
-            steps { 
-                script{
-                    sh '''#!/bin/bash
-                    ls
-                    mail -s "Lab 1 Failed" serdjanrolovic@gmail < newsapp/result.txt
-                    '''
-                }
-            }
-        }
     }
 }
