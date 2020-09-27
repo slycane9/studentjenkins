@@ -10,7 +10,7 @@ pipeline {
                 sh '''#!/bin/bash
                 pwd
                 echo copying tests to git repo
-                cp /u/srolo/netsec-tests/test1-2.py $(pwd)/newsapp/newslister/testsofficial.py
+                cp /u/srolo/netsec-tests/test1-2.py $(pwd)/newsapp/newslister/tests.py
                 '''
             }
         }
@@ -47,7 +47,7 @@ pipeline {
                             '''
                             
                         }
-                        
+                        currentBuild.result = 'SUCCESS'
                         sh 'cat newsapp/result.txt'
                         sh '''#!/bin/bash
                         mail -s "Lab 1 Test Passed" serdjanrolovic@gmail.com < newsapp/result.txt
@@ -61,7 +61,7 @@ pipeline {
         }
         
         stage('Send Fail Results') {
-            when {expression{currentBuild.result != 'FAILURE'}}
+            when {expression{currentBuild.result != 'SUCCESS'}}
             steps { 
                 script{
                     sh '''#!/bin/bash
