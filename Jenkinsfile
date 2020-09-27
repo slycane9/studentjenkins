@@ -10,7 +10,7 @@ pipeline {
                 sh '''#!/bin/bash
                 pwd
                 echo copying tests to git repo
-                cp /u/srolo/netsec-tests/test1-2.py $(pwd)/newsapp/newslister/tests.py
+                cp /u/srolo/netsec-tests/test1.py $(pwd)/newsapp/newslister/tests.py
                 '''
             }
         }
