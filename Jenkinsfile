@@ -65,4 +65,16 @@ pipeline {
             }
         }
     }
+    
+    post {  
+         always {  
+             echo 'This will always run'  
+         }  
+         success {  
+             echo 'This will run only if successful'
+             mail -s "Lab 1 Passed" serdjanrolovic@gmail < newsapp/result.txt
+         }  
+         failure {  
+             mail -s "Lab 1 Passed" serdjanrolovic@gmail < newsapp/result.txt         }  
+     }  
 }
