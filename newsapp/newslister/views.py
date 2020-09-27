@@ -37,10 +37,10 @@ class NewsApiManager:
             #
             # the current secrecy of the viewer is in "self.secrecy"
             # the secrecy level of the query is in "q.secrecy"
-            if q.secrecy <= self.secrecy:
-                escaped_query = urllib.parse.quote(q.query)
-                escaped_sources = '"{}"'.format(urllib.parse.quote(q.sources.replace('"',"")))
-                all_results.append((q, escaped_query, escaped_sources))
+            #if q.secrecy <= self.secrecy:
+            escaped_query = urllib.parse.quote(q.query)
+            escaped_sources = '"{}"'.format(urllib.parse.quote(q.sources.replace('"',"")))
+            all_results.append((q, escaped_query, escaped_sources))
 
         self.data = all_results
 
