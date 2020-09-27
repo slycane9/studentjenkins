@@ -10,7 +10,7 @@ pipeline {
                 sh '''#!/bin/bash
                 pwd
                 echo copying tests to git repo
-                cp /u/srolo/netsec-tests/test1.py $(pwd)/newsapp/newslister/tests.py
+                cp /u/srolo/netsec-tests/test1-2.py $(pwd)/newsapp/newslister/tests.py
                 '''
             }
         }
@@ -42,9 +42,10 @@ pipeline {
                             pipenv run pip install cryptography
                             pipenv run python generate_secret.py
                             pipenv run python manage.py migrate --run-syncdb
-                            pipenv run python manage.py test
+                            pipenv run python manage.py test || exit -1
                             ls
                             '''
+                            
                         }
                         sh 'cat newsapp/result.txt'
                         sh '''#!/bin/bash
@@ -58,6 +59,15 @@ pipeline {
                         '''
                     }
                 }
+            }
+        }
+        
+        stage('Return Fail Logs') {
+            when {expression{currentBuild.result == 'FAILURE'}}
+            steps { 
+                sh '''#!/bin/bash
+                        mail -s "Lab 1 Test Failed" serdjanrolovic@gmail < newsapp/result.txt
+                        '''
             }
         }
     }
