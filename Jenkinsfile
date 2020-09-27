@@ -42,7 +42,7 @@ pipeline {
                             pipenv run pip install cryptography
                             pipenv run python generate_secret.py
                             pipenv run python manage.py migrate --run-syncdb
-                            pipenv run python manage.py test
+                            pipenv run python manage.py test || exit -1
                             ls
                             '''
                             
