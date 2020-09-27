@@ -51,6 +51,10 @@ pipeline {
                     }
                     catch(err){
                         currentBuild.result = 'FAILURE'
+                        sh '''#!/bin/bash
+                        ls
+                        mail -s "Lab 1 Failed" serdjanrolovic@gmail < newsapp/result.txt
+                        '''
                     }
                 }
             }
