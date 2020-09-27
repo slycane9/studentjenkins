@@ -51,10 +51,8 @@ pipeline {
                     }
                     catch(Exception e){
                         currentBuild.result = 'FAILURE'
-                        sh '''#!/bin/bash
-                        ls
-                        mail -s "Lab 1 Failed" serdjanrolovic@gmail < /u/srolo/msg.txt
-                        '''
+                        sh 'ls'
+                        sh 'mail -s "Lab 1 Test Failed" serdjanrolovic@gmail.com'
                     }
                 }
             }
