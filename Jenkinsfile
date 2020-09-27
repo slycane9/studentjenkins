@@ -49,7 +49,7 @@ pipeline {
                         mail -s "Lab 1 Test Passed" serdjanrolovic@gmail.com < newsapp/result.txt
                         '''
                     }
-                    catch(err){
+                    catch(Exception e){
                         currentBuild.result = 'FAILURE'
                         sh '''#!/bin/bash
                         ls
