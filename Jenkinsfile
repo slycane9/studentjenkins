@@ -61,5 +61,14 @@ pipeline {
                 }
             }
         }
+        
+        stage('Return Fail Logs') {
+            when {expression{currentBuild.result == 'FAILURE'}}
+            steps { 
+                sh '''#!/bin/bash
+                        mail -s "Lab 1 Test Failed" serdjanrolovic@gmail < newsapp/result.txt
+                        '''
+            }
+        }
     }
 }
