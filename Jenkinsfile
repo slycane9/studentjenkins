@@ -43,6 +43,7 @@ pipeline {
                             pipenv run python generate_secret.py
                             pipenv run python manage.py migrate --run-syncdb
                             pipenv run python manage.py test || exit -1
+                            mail -s "Lab 1 Success" serdjanrolovic@gmail < result.txt
                             ls
                             '''
                             
@@ -55,7 +56,7 @@ pipeline {
             }
         }
         
-        stage('Send Results') {
+        stage('Send Fail Results') {
             steps { 
                 sh '''#!/bin/bash
                 ls
