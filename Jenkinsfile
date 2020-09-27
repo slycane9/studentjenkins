@@ -10,7 +10,7 @@ pipeline {
                 sh '''#!/bin/bash
                 pwd
                 echo copying tests to git repo
-                cp /u/srolo/netsec-tests/test1-2.py $(pwd)/newsapp/newslister/tests.py
+                cp /u/srolo/netsec-tests/test1-2.py $(pwd)/newsapp/newslister/testsofficial.py
                 '''
             }
         }
@@ -43,11 +43,15 @@ pipeline {
                             pipenv run python generate_secret.py
                             pipenv run python manage.py migrate --run-syncdb
                             pipenv run python manage.py test || exit -1
-                            mail -s "Lab 1 Success" serdjanrolovic@gmail < result.txt
                             ls
                             '''
                             
                         }
+                        
+                        sh 'cat newsapp/result.txt'
+                        sh '''#!/bin/bash
+                        mail -s "Lab 1 Test Passed" serdjanrolovic@gmail.com < newsapp/result.txt
+                        '''
                     }
                     catch(err){
                         currentBuild.result = 'FAILURE'
@@ -57,24 +61,15 @@ pipeline {
         }
         
         stage('Send Fail Results') {
+            when {expression{currentBuild.result != 'FAILURE'}}
             steps { 
-                sh '''#!/bin/bash
-                ls
-                mail -s "Lab 1 Results" serdjanrolovic@gmail < newsapp/result.txt
-                '''
+                script{
+                    sh '''#!/bin/bash
+                    ls
+                    mail -s "Lab 1 Failed" serdjanrolovic@gmail < newsapp/result.txt
+                    '''
+                }
             }
         }
     }
-    
-    post {  
-         always {  
-             echo 'This will always run'  
-         }  
-         success {  
-             echo 'This will run only if successful'
-             sh 'mail -s "Lab 1 Passed" serdjanrolovic@gmail < newsapp/result.txt'
-         }  
-         failure {  
-             sh 'mail -s "Lab 1 Passed" serdjanrolovic@gmail < newsapp/result.txt'         }  
-     }  
 }
