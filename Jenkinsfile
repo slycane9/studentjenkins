@@ -10,7 +10,7 @@ pipeline {
                 sh '''#!/bin/bash
                 pwd
                 echo copying tests to git repo
-                cp /u/srolo/netsec-tests/test1.py $(pwd)/newsapp/newslister/tests.py
+                cp /u/srolo/netsec-tests/test1-2.py $(pwd)/newsapp/newslister/tests.py
                 '''
             }
         }
@@ -42,9 +42,9 @@ pipeline {
                             pipenv run pip install cryptography
                             pipenv run python generate_secret.py
                             pipenv run python manage.py migrate --run-syncdb
+                            pipenv run python manage.py test
+                            ls
                             '''
-                            sh 'pipenv run python newsapp/manage.py test'
-                            sh 'ls'
                             
                         }
                         sh 'cat newsapp/result.txt'
