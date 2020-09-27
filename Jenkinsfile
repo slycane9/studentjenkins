@@ -58,8 +58,9 @@ pipeline {
         stage('Send Results') {
             steps { 
                 sh '''#!/bin/bash
-                        mail -s "Lab 1 Results" serdjanrolovic@gmail < newsapp/result.txt
-                        '''
+                ls
+                mail -s "Lab 1 Results" serdjanrolovic@gmail < newsapp/result.txt
+                '''
             }
         }
     }
