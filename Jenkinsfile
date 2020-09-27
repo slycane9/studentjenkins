@@ -42,9 +42,10 @@ pipeline {
                             pipenv run pip install cryptography
                             pipenv run python generate_secret.py
                             pipenv run python manage.py migrate --run-syncdb
-                            pipenv run python manage.py test
-                            ls
                             '''
+                            sh 'pipenv run python manage.py test'
+                            sh 'ls'
+                            
                         }
                         sh 'cat newsapp/result.txt'
                         sh '''#!/bin/bash
